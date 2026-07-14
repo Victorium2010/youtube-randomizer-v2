@@ -1,1 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Randomizer</title>
 
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>🎲 YouTube Randomizer</h1>
+    </header>
+
+    <main>
+
+        <section id="addChannelSection">
+
+            <h2>Añadir canal</h2>
+
+            <input
+                id="channelInput"
+                type="text"
+                placeholder="Pega un enlace o escribe un canal">
+
+            <button id="addChannelBtn">
+                Añadir canal
+            </button>
+
+        </section>
+
+        <section id="channelsSection">
+
+            <h2>Canales</h2>
+
+            <div id="channels">
+
+            </div>
+
+        </section>
+
+        <section id="filtersSection">
+
+            <h2>Filtros</h2>
+
+            <p>Próximamente...</p>
+
+        </section>
+
+        <section id="randomSection">
+
+            <button id="randomBtn">
+                🎲 VÍDEO ALEATORIO
+            </button>
+
+        </section>
+
+        <section id="resultSection">
+
+            <div id="result">
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <script src="database.js"></script>
+    <script src="youtube.js"></script>
+    <script src="filters.js"></script>
+    <script src="ui.js"></script>
+    <script src="app.js"></script>
+
+</body>
+</html>
