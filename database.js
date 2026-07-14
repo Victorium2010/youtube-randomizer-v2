@@ -1,6 +1,23 @@
 let db;
 
 function openDatabase() {
+ function addChannel(channel) {
+
+    return new Promise((resolve, reject) => {
+
+        const transaction = db.transaction("channels", "readwrite");
+
+        const store = transaction.objectStore("channels");
+
+        const request = store.put(channel);
+
+        request.onsuccess = () => resolve();
+
+        request.onerror = () => reject("Error al guardar el canal");
+
+    });
+
+ }   
 
     return new Promise((resolve, reject) => {
 
