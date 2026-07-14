@@ -1,33 +1,27 @@
 document.addEventListener("DOMContentLoaded", async () => {
 
     try {
-
         await openDatabase();
-
-        console.log("Aplicación iniciada");
-
+        await loadChannels();
     } catch (error) {
-
         console.error(error);
-
     }
 
-    const addButton = document.getElementById("addChannelBtn");
+    document.getElementById("addChannelBtn").addEventListener("click", async () => {
 
-    addButton.addEventListener("click", async () => {
+        const input = document.getElementById("channelInput").value.trim();
 
-        const input = document.getElementById("channelInput").value;
+        if (!input) return;
 
         try {
 
             const channel = await getChannelInfo(input);
 
-            alert(
-                "Canal encontrado:\n\n" +
-                channel.name +
-                "\n" +
-                channel.id
-            );
+            await saveChannel(channel);
+
+            document.getElementById("channelInput").value = "";
+
+            await loadChannels();
 
         } catch (error) {
 
@@ -38,3 +32,23 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
 });
+
+async function loadChannels() {
+
+    const channels = await getChannels();
+
+    const container = document.getElementById("channels");
+
+    container.innerHTML = "";
+
+    channels.forEach(channel => {
+
+        const div = document.createElement("div");
+
+        div.textContent = "📺 " + channel.name;
+
+        container.appendChild(div);
+
+    });
+
+}
