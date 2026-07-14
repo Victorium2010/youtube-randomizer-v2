@@ -63,3 +63,34 @@ function openDatabase() {
     });
 
 }
+async function saveChannel(channel) {
+
+    return new Promise((resolve, reject) => {
+
+        const transaction = db.transaction("channels", "readwrite");
+        const store = transaction.objectStore("channels");
+
+        const request = store.put(channel);
+
+        request.onsuccess = () => resolve();
+        request.onerror = () => reject("No se pudo guardar el canal");
+
+    });
+
+}
+
+async function getChannels() {
+
+    return new Promise((resolve, reject) => {
+
+        const transaction = db.transaction("channels", "readonly");
+        const store = transaction.objectStore("channels");
+
+        const request = store.getAll();
+
+        request.onsuccess = () => resolve(request.result);
+        request.onerror = () => reject("No se pudieron leer los canales");
+
+    });
+
+}
