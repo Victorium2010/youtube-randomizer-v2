@@ -4,7 +4,12 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         await openDatabase();
 
-        console.log("Aplicación iniciada");
+        await addChannel({
+            id: "prueba",
+            name: "Canal de prueba"
+        });
+
+        console.log("Canal guardado correctamente");
 
     } catch (error) {
 
