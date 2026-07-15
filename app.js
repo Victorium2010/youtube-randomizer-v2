@@ -17,11 +17,15 @@ document.addEventListener("DOMContentLoaded", async () => {
 
             const channel = await getChannelInfo(input);
 
-            await saveChannel(channel);
+const videos = await downloadAllVideos(channel.uploadsPlaylist);
 
-            document.getElementById("channelInput").value = "";
+alert("Se han descargado " + videos.length + " vídeos.");
 
-            await loadChannels();
+await saveChannel(channel);
+
+document.getElementById("channelInput").value = "";
+
+await loadChannels();
 
         } catch (error) {
 
