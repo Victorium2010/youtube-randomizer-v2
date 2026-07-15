@@ -94,3 +94,30 @@ async function getChannels() {
     });
 
 }
+async function saveVideos(videos) {
+
+    return new Promise((resolve, reject) => {
+
+        const transaction = db.transaction("videos", "readwrite");
+        const store = transaction.objectStore("videos");
+
+        for (const video of videos) {
+
+            store.put({
+                videoId: video.contentDetails.videoId,
+                title: video.snippet.title,
+                channelId: video.snippet.channelId,
+                channelName: video.snippet.channelTitle,
+                publishedAt: video.snippet.publishedAt,
+                watched: false
+            });
+
+        }
+
+        transaction.oncomplete = () => resolve();
+
+        transaction.onerror = () => reject("Error al guardar vídeos");
+
+    });
+
+}
