@@ -35,3 +35,21 @@ async function getChannelInfo(input) {
     };
 
 }
+async function getPlaylistPage(playlistId, pageToken = "") {
+
+    let url =
+        `https://www.googleapis.com/youtube/v3/playlistItems` +
+        `?part=snippet,contentDetails` +
+        `&playlistId=${playlistId}` +
+        `&maxResults=50` +
+        `&key=${API_KEY}`;
+
+    if (pageToken) {
+        url += `&pageToken=${pageToken}`;
+    }
+
+    const response = await fetch(url);
+    const data = await response.json();
+
+    return data;
+}
