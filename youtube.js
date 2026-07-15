@@ -53,3 +53,33 @@ async function getPlaylistPage(playlistId, pageToken = "") {
 
     return data;
 }
+async function downloadAllVideos(playlistId) {
+
+    let allVideos = [];
+    let nextPageToken = "";
+
+    do {
+
+        const page = await getPlaylistPage(
+            playlistId,
+            nextPageToken
+        );
+
+        if (page.items) {
+
+            allVideos.push(...page.items);
+
+        }
+
+        nextPageToken = page.nextPageToken || "";
+
+        console.log(
+            "Vídeos descargados:",
+            allVideos.length
+        );
+
+    } while (nextPageToken);
+
+    return allVideos;
+
+}
