@@ -70,7 +70,10 @@ async function saveChannel(channel) {
         const transaction = db.transaction("channels", "readwrite");
         const store = transaction.objectStore("channels");
 
-        const request = store.put(channel);
+        const request = store.put({
+    ...channel,
+    lastUpdate: new Date().toISOString()
+});
 
         request.onsuccess = () => resolve();
         request.onerror = () => reject("No se pudo guardar el canal");
