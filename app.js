@@ -19,7 +19,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 const videos = await downloadAllVideos(channel.uploadsPlaylist);
 
-alert("Se han descargado " + videos.length + " vídeos.");
+await saveVideos(videos);
+
+alert("Se han descargado y guardado " + videos.length + " vídeos.");
 
 await saveChannel(channel);
 
