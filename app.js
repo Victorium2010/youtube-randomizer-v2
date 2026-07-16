@@ -58,3 +58,23 @@ async function loadChannels() {
     });
 
 }
+document.getElementById("randomBtn").addEventListener("click", async () => {
+
+    const videos = await getVideos();
+
+    if (videos.length === 0) {
+        alert("No hay vídeos guardados.");
+        return;
+    }
+
+    const randomVideo = videos[Math.floor(Math.random() * videos.length)];
+
+    document.getElementById("result").innerHTML = `
+        <h3>${randomVideo.title}</h3>
+        <p>${randomVideo.channelName}</p>
+        <a href="https://www.youtube.com/watch?v=${randomVideo.videoId}" target="_blank">
+            Ver vídeo
+        </a>
+    `;
+
+});
