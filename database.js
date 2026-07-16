@@ -121,3 +121,19 @@ async function saveVideos(videos) {
     });
 
 }
+async function getVideos() {
+
+    return new Promise((resolve, reject) => {
+
+        const transaction = db.transaction("videos", "readonly");
+        const store = transaction.objectStore("videos");
+
+        const request = store.getAll();
+
+        request.onsuccess = () => resolve(request.result);
+
+        request.onerror = () => reject("Error al leer los vídeos");
+
+    });
+
+}
